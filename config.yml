@@ -1,0 +1,34 @@
+avi_config:
+  pool:
+    - name: "{{ Contract }}{{ ServiceGraph }}-pool"
+      # state: absent
+      lb_algorithm: LB_ALGORITHM_ROUND_ROBIN
+      apic_epg_name: '{{ AppProfile }}:{{ ServerEPG }}'
+      cloud_ref: '/api/cloud/?name={{ AviCloudName }}'
+      tenant: '{{ AviTenant }}' 
+      tenant_ref: '/api/tenant/?name={{ AviTenant }}'
+  virtualservice:
+    - name: "VS{{ Contract }}:{{ ServiceGraph }}"
+      # state: absent
+      services:
+        - port: 80
+      apic_contract_graph: '{{Contract}}:{{ServiceGraph}}'
+      pool_ref: '/api/pool?name={{ Contract }}{{ ServiceGraph }}-pool'
+      cloud_ref: '/api/cloud?name={{ AviCloudName }}'
+      tenant: '{{ AviTenant }}'
+      tenant_ref: '/api/tenant/?name={{ AviTenant }}' 
+      analytics_policy:
+        client_insights: ACTIVE
+        full_client_logs:
+          all_headers: true
+          duration: 0
+          enabled: true
+        metrics_realtime_update:
+          duration: 0
+          enabled: true
+      vip:
+        - ip_address:
+            addr: "{{ appaci_vip }}"
+            type: 'V4'
+          vip_id: '1'
+

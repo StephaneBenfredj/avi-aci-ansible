@@ -1,0 +1,28 @@
+# This is playbook for an application.
+# This can invoke any of the avi roles like application, profile or cloud
+#
+---
+- hosts: localhost
+  connection: local
+  vars:
+    api_version: 18.1.3
+    app_name: appaci
+    Contract: Prod_Web_Contract
+    ServiceGraph: stephane-sg
+    ServerEPG: Server-EPG-201
+    AppProfile: Prod
+    AviCloudName: Default-Cloud
+    AviTenant: stephane-demo4	
+  roles:
+    - role: avinetworks.avisdk
+
+  tasks:
+    - name: Setting up Application
+      debug: msg="{{ app_name }}"
+
+    - name: Avi Application | Setup App1
+      include_role:
+        name: avinetworks.aviconfig
+      vars:
+        avi_config_file: "config.yml"
+        avi_creds_file: "vars/creds.yml"
