@@ -44,10 +44,13 @@ avi_config:
     - name: Default-Group
       cloud_ref: '/api/cloud?name={{ AviCloudName }}'
       vcenter_folder: Stephane
+      se_name_prefix: avi
       #vcenter_clusters:
       #  cluster_refs:
       #    - '/api/vimgrclusterruntime?name=Arista'
       #  include: True
-      min_se: 2
+      
       max_se: 4
       buffer_se: 0
+      min_scaleout_per_vs: 2
+      max_scaleout_per_vs: 4
