@@ -5,6 +5,7 @@ avi_controller: 1.2.3.4
 avi_username: ansible
 avi_password: avi123$%
 
+# 
 avi_credentials:
   avi_controller: 1.2.3.4
   avi_username: ansible

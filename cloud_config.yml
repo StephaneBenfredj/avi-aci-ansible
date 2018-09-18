@@ -1,8 +1,9 @@
-avi_cloud_discovery_wait: 180
+#avi_cloud_discovery_wait: 180
 
 avi_config:
+  #avi_cloud_discovery_wait: 180
   cloud:
-    - api_version: 18.1.3
+    - api_version: "{{ api_version }}" 
       name: "{{ AviCloudName }}"
       vtype: CLOUD_VCENTER
       dhcp_enabled: false
