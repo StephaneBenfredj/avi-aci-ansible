@@ -2,15 +2,16 @@
   connection: local
   vars:
     api_version: 18.1.3
-    cloud_name: Default-Cloud
+    AviCloudName: Default-Cloud
+    
   roles:
     - role: avinetworks.avisdk
   tasks:
     - name: Setting up cloud
-      debug: msg="{{cloud_name}}"
+      debug: msg="{{ AviCloudName }}"
     - name: Avi Cloud | Setup VMWare Cloud with Write Access
       include_role:
         name: avinetworks.aviconfig
       vars:
-        avi_config_file: "cloud/config.yml"
+        avi_config_file: "cloud_config.yml"
         avi_creds_file: "vars/creds.yml"
