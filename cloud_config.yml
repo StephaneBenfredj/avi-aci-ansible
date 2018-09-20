@@ -1,10 +1,11 @@
-#avi_cloud_discovery_wait: 180
+
 
 avi_config:
-  #avi_cloud_discovery_wait: 180
+  avi_cloud_discovery_wait: 120
   cloud:
-    - api_version: "{{ api_version }}" 
-      name: "{{ AviCloudName }}"
+    - name: "{{ AviCloudName }}"
+      api_version: "{{ api_version }}" 
+      
       vtype: CLOUD_VCENTER
       dhcp_enabled: false
       apic_mode: true
@@ -21,25 +22,16 @@ avi_config:
       vcenter_configuration:
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
-        datacenter: "Apic"
+        datacenter: " {{ vcenter_dc }}"
         management_network: '/api/vimgrnwruntime?name={{ mgmt_network }}'
         privilege: "WRITE_ACCESS"
         vcenter_url: "{{ vcenter_ip }}"
         management_ip_subnet:
           ip_addr:
-            addr: 10.128.3.0
+            addr: "{{ mgmt_subnet }}"
             type: V4
-          mask: 24
-          static_ranges:
-            - begin:
-                addr: 10.128.3.10
-                type: V4
-              end:
-                addr: 10.128.3.15
-                type: V4
+          mask: "{{ mgmt_subnet_mask }}"
 
-
-  
 
   serviceenginegroup:
     - name: Default-Group
@@ -54,4 +46,4 @@ avi_config:
       max_se: 4
       buffer_se: 0
       min_scaleout_per_vs: 2
-      max_scaleout_per_vs: 4
+      max_scaleout_per_vs: 4 
