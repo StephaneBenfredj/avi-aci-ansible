@@ -1,1 +1,2 @@
 vars/creds.yml
+logs/*.log
