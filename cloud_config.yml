@@ -23,7 +23,7 @@ avi_config:
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         datacenter: "{{ vcenter_dc }}"
-        management_network: '/api/vimgrnwruntime?name={{ mgmt_network }}'
+        management_network: "/api/vimgrnwruntime?name={{ mgmt_network }}"
         privilege: "WRITE_ACCESS"
         vcenter_url: "{{ vcenter_ip }}"
         management_ip_subnet:
@@ -35,7 +35,7 @@ avi_config:
 
   serviceenginegroup:
     - name: Default-Group
-      cloud_ref: '/api/cloud?name={{ AviCloudName }}'
+      cloud_ref: "/api/cloud?name={{ AviCloudName }}"
       vcenter_folder: Stephane
       se_name_prefix: avi
       #vcenter_clusters:

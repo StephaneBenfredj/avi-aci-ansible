@@ -53,7 +53,7 @@
           username: "{{ avi_username }}"
           password: "{{ avi_password }}"
           api_version: "{{ api_version }}"
-        name: "{{ mgmt_subnet }}"
+        name: "{{ mgmt_network }}"
         vrf_context_ref: '/api/vrfcontext/?name=global'
         tenant_ref: '/api/tenant/?name=admin'
         cloud_ref: "/api/cloud/?name={{ AviCloudName }}"
@@ -102,7 +102,7 @@
           username: "{{ vcenter_username }}"
           password: "{{ vcenter_password }}"
           datacenter: "{{ vcenter_dc }}"
-          management_network: '/api/vimgrnwruntime?name={{ mgmt_network }}'
+          management_network: "/api/vimgrnwruntime?name={{ mgmt_network }}"
           privilege: "WRITE_ACCESS"
           vcenter_url: "{{ vcenter_ip }}"
           management_ip_subnet:
