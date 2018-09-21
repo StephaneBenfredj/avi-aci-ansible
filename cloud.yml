@@ -47,6 +47,7 @@
 # Network for admin Cloud
     - name: Config Admin Network
       avi_network:
+        api_version: "{{ api_version }}"
         avi_credentials:
           controller: "{{ avi_controller }}"
           username: "{{ avi_username }}"
@@ -76,6 +77,7 @@
 # reconfigure cloud
     - name: reconfigure Cloud
       avi_cloud:
+        api_version: "{{ api_version }}"
         avi_credentials:
           controller: "{{ avi_controller }}"
           username: "{{ avi_username }}"

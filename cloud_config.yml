@@ -4,7 +4,7 @@ avi_config:
   avi_cloud_discovery_wait: 120
   cloud:
     - name: "{{ AviCloudName }}"
-      api_version: "{{ api_version }}" 
+      api_version: "{{ api_version }}"
       
       vtype: CLOUD_VCENTER
       dhcp_enabled: false
@@ -22,7 +22,7 @@ avi_config:
       vcenter_configuration:
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
-        datacenter: " {{ vcenter_dc }}"
+        datacenter: "{{ vcenter_dc }}"
         management_network: '/api/vimgrnwruntime?name={{ mgmt_network }}'
         privilege: "WRITE_ACCESS"
         vcenter_url: "{{ vcenter_ip }}"
