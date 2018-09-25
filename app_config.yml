@@ -3,6 +3,8 @@ avi_config:
     - name: "{{ Contract }}{{ ServiceGraph }}-pool"
       # state: absent
       lb_algorithm: LB_ALGORITHM_ROUND_ROBIN
+      #health_monitor_refs:
+      #  - '/api/healthmonitor/?name=System-HTTP'
       apic_epg_name: '{{ AppProfile }}:{{ ServerEPG }}'
       cloud_ref: '/api/cloud/?name={{ AviCloudName }}'
       tenant: '{{ Tenant }}' 
