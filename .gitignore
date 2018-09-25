@@ -1,2 +1,3 @@
 vars/creds.yml
 logs/*.log
+*.retry
