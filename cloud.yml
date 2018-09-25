@@ -18,7 +18,7 @@
         avi_creds_file: "vars/creds.yml"
 
 
-  #config (hidden)management VRF 
+#configure (hidden) management VRF 
     - name: Configure mgmt vrf
       avi_vrfcontext:
         avi_credentials:
@@ -74,7 +74,7 @@
         dhcp_enabled: false
         #vcenter_dvs: true
         
-# reconfigure Cloud
+# reconfigure Cloud with Management Network
     - name: reconfigure Cloud
       avi_cloud:
         api_version: "{{ api_version }}"
