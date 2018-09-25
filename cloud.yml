@@ -121,7 +121,7 @@
           username: "{{ avi_username }}"
           password: "{{ avi_password }}"
           api_version: "{{ api_version }}"
-        name: Default-Group
+        name: "{{ SEgroupname }}"
         cloud_ref: "/api/cloud?name={{ AviCloudName }}"
         vcenter_folder: "{{ vcenter_folder }}"
         se_name_prefix: avi
