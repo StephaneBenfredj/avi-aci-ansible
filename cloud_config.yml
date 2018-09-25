@@ -31,19 +31,3 @@ avi_config:
             addr: "{{ mgmt_subnet }}"
             type: V4
           mask: "{{ mgmt_subnet_mask }}"
-
-
-  serviceenginegroup:
-    - name: Default-Group
-      cloud_ref: "/api/cloud?name={{ AviCloudName }}"
-      vcenter_folder: "{{ vcenter_folder }}"
-      se_name_prefix: avi
-      #vcenter_clusters:
-      #  cluster_refs:
-      #    - '/api/vimgrclusterruntime?name=Arista'
-      #  include: True
-      
-      max_se: 4
-      buffer_se: 0
-      min_scaleout_per_vs: 1
-      max_scaleout_per_vs: 4 
