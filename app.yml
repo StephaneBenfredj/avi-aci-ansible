@@ -4,15 +4,9 @@
 ---
 - hosts: localhost
   connection: local
-  vars:
-    api_version: 18.1.3
-    app_name: appaci
-    Contract: Prod_Web_Contract
-    ServiceGraph: stephane-sg
-    ServerEPG: Server-EPG-201
-    AppProfile: Prod
-    AviCloudName: Default-Cloud
-    AviTenant: stephane-demo4	
+  vars_files:
+    - vars/creds.yml
+  	
   roles:
     - role: avinetworks.avisdk
 

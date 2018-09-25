@@ -36,3 +36,11 @@ mgmt_end_addr: 10.128.3.15
 
 # all apps use the same backend servers
 appaci_vip: 10.1.2.3
+
+#
+app_name: appaci
+Contract: Prod_Web_Contract
+ServiceGraph: Avi-sg
+ServerEPG: Server-EPG-201
+AppProfile: Prod
+AviTenant: demo4
