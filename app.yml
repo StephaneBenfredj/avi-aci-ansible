@@ -6,7 +6,6 @@
   connection: local
   vars_files:
     - vars/creds.yml
-  	
   roles:
     - role: avinetworks.avisdk
 
