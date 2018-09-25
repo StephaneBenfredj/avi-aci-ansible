@@ -36,7 +36,7 @@ avi_config:
   serviceenginegroup:
     - name: Default-Group
       cloud_ref: "/api/cloud?name={{ AviCloudName }}"
-      vcenter_folder: Stephane
+      vcenter_folder: "{{ vcenter_folder }}"
       se_name_prefix: avi
       #vcenter_clusters:
       #  cluster_refs:
@@ -45,5 +45,5 @@ avi_config:
       
       max_se: 4
       buffer_se: 0
-      min_scaleout_per_vs: 2
+      min_scaleout_per_vs: 1
       max_scaleout_per_vs: 4 
