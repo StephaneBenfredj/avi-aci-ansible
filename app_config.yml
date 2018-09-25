@@ -5,8 +5,8 @@ avi_config:
       lb_algorithm: LB_ALGORITHM_ROUND_ROBIN
       apic_epg_name: '{{ AppProfile }}:{{ ServerEPG }}'
       cloud_ref: '/api/cloud/?name={{ AviCloudName }}'
-      tenant: '{{ AviTenant }}' 
-      tenant_ref: '/api/tenant/?name={{ AviTenant }}'
+      tenant: '{{ Tenant }}' 
+      tenant_ref: '/api/tenant/?name={{ Tenant }}'
   virtualservice:
     - name: "VS{{ Contract }}:{{ ServiceGraph }}"
       # state: absent
@@ -15,8 +15,8 @@ avi_config:
       apic_contract_graph: '{{Contract}}:{{ServiceGraph}}'
       pool_ref: '/api/pool?name={{ Contract }}{{ ServiceGraph }}-pool'
       cloud_ref: '/api/cloud?name={{ AviCloudName }}'
-      tenant: '{{ AviTenant }}'
-      tenant_ref: '/api/tenant/?name={{ AviTenant }}' 
+      tenant: '{{ Tenant }}'
+      tenant_ref: '/api/tenant/?name={{ Tenant }}' 
       analytics_policy:
         client_insights: ACTIVE
         full_client_logs:

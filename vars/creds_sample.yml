@@ -43,4 +43,4 @@ Contract: Prod_Web_Contract
 ServiceGraph: Avi-sg
 ServerEPG: Server-EPG-201
 AppProfile: Prod
-AviTenant: demo4
+Tenant: demo4
