@@ -1,3 +1,4 @@
 vars/creds.yml
+vars/tenant_vars.yml
 logs/*.log
 *.retry
