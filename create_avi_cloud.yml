@@ -21,11 +21,8 @@
 #configure (hidden) management VRF 
     - name: Configure mgmt vrf
       avi_vrfcontext:
-        avi_credentials:
-          controller: "{{ avi_controller }}"
-          username: "{{ avi_username }}"
-          password: "{{ avi_password }}"
-          api_version: "{{ api_version }}"
+        api_version: "{{ api_version }}"
+        avi_credentials: "{{ avi_credentials }}"
         name: management #hidden vrf 
         #avi_api_update_method: patch
         #avi_api_patch_op: add
@@ -48,11 +45,7 @@
     - name: Config Admin Network
       avi_network:
         api_version: "{{ api_version }}"
-        avi_credentials:
-          controller: "{{ avi_controller }}"
-          username: "{{ avi_username }}"
-          password: "{{ avi_password }}"
-          api_version: "{{ api_version }}"
+        avi_credentials: "{{ avi_credentials }}"
         name: "{{ mgmt_network }}"
         vrf_context_ref: '/api/vrfcontext/?name=global'
         tenant_ref: '/api/tenant/?name=admin'
@@ -78,11 +71,7 @@
     - name: reconfigure Cloud
       avi_cloud:
         api_version: "{{ api_version }}"
-        avi_credentials:
-          controller: "{{ avi_controller }}"
-          username: "{{ avi_username }}"
-          password: "{{ avi_password }}"
-          api_version: "{{ api_version }}"
+        avi_credentials: "{{ avi_credentials }}"
         name: "{{ AviCloudName }}"
         vtype: CLOUD_VCENTER
         tenant_ref: '/api/tenant/?name=admin'
@@ -116,11 +105,7 @@
       tags: SEG
       avi_serviceenginegroup:
         api_version: "{{ api_version }}"
-        avi_credentials:
-          controller: "{{ avi_controller }}"
-          username: "{{ avi_username }}"
-          password: "{{ avi_password }}"
-          api_version: "{{ api_version }}"
+        avi_credentials: "{{ avi_credentials }}"
         name: "{{ SEgroupname }}"
         cloud_ref: "/api/cloud?name={{ AviCloudName }}"
         vcenter_folder: "{{ vcenter_folder }}"
