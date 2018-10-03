@@ -29,15 +29,18 @@ ansible-playbook create_avi_cloud.yml
 
 Create demo tenant in APIC
 
+
 Export L4-L7 device from common to demo tenant in APIC:
 ```
-ansible-playbook extract_AviClusterName_export.yml -i _hosts_Basic_demo
+ansible-playbook extract_AviClusterName_export.yml -i hosts_apic
 ```
+
 
 Create static ranges for SE address allocation in dataplane 
 ```
 ansible-playbook create_network_ranges
 ```
+
 
 Create Virtual Service
 ```
