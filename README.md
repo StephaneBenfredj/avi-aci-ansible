@@ -6,11 +6,10 @@ set of playbooks to configure cloud in Avi Vantage with Cisco ACI integration
 
 ## Content
 
-create_avi_cloud.yml
-create_network_ranges.yml
-create_avi_application.yml
-
-extract_AviClusterName_export.yml (work in progress - export LDC from common to target tenant)
+- create_avi_cloud.yml
+- create_network_ranges.yml
+- create_avi_application.yml
+- extract_AviClusterName_export.yml (work in progress - export LDC from common to target tenant)
 
 
 ## HOWTO
