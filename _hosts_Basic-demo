@@ -1,0 +1,158 @@
+[apic]
+10.128.2.133
+
+[apic:vars]
+
+##############################
+#### connection variables ####
+##############################
+
+#ansible_connection=local
+#username=admin
+#password=avinetworks
+#validate_certs=no
+#use_proxy=no
+#use_ssl=yes
+#
+
+#####################################################
+#### configuration variables for Network Centric ####
+#####################################################
+
+state=present
+# options: present/absent/query
+
+tenant=stephane-demo4
+
+vrf=Production
+
+policy_control_preference=unenforced
+# options: unenforced/enforced
+
+bd_1=Prod-200
+bd_2=Prod-201
+
+enable_routing=True
+
+arp_flooding=False
+
+l2_unknown_unicast=proxy
+# options: proxy/flood
+
+ip_learning=True
+
+gateway_1=10.200.0.254
+gateway_2=10.201.0.254
+
+mask=24
+
+scope=private
+# options: private/public/shared
+
+# app profile
+ap=Prod
+
+epg_1=Client-EPG-200
+epg_2=Server-EPG-201
+
+intra_epg_isolation=unenforced
+# options: unenforced/enforced
+
+priority=unspecified
+# options: level1/level2/level3/unspecified
+
+domain_type=vmm
+# options: vmm/phys
+
+vm_provider=vmware
+# options: vmware/openstack/microsoft
+
+domain=vc-1
+
+deploy_immediacy=on-demand
+# options: immediate/lazy  >>> on-demand as per error message , lazy does not exist, on-demand returns error as well
+
+resolution_immediacy=lazy
+# options: immediate/lazy/pre-provision
+
+
+physdom=Baremetals_Physical_Domain
+
+epg_bm=Segment-200
+
+bm_encap_vlan=200
+
+
+
+#########################################################
+#### configuration variables for Application Centric ####
+#########################################################
+
+contract=Prod_Web_Contract
+
+contract_scope=tenant
+# options: application-profile/context/global/tenant
+
+reverse_filter=True
+
+subject_1=Subject_1
+subject_2=Subject_2
+subject_3=Subject_3
+
+filter_1=Web_Filter
+filter_2=SSH_Filter
+filter_3=Ping_Filter
+
+filter_1_entry=Web_Entry
+filter_2_entry=SSH_Entry
+filter_3_entry=Ping_Entry
+
+ether_type=ip
+# options: arp/fcoe/ip/mac_security/mpls_ucast/unspecified
+
+filter_1_dst_port=80
+filter_2_dst_port=22
+filter_3_dst_port=unspecified
+
+filter_1_ip_protocol=tcp
+filter_2_ip_protocol=tcp
+filter_3_ip_protocol=icmp
+# options: eigrp/egp/icmp/icmpv6/igmp/igp/l2tp/ospfigp/pim/tcp/udp/unspecified
+
+stateful=no
+
+log=log
+
+contract_type_epg_1=consumer
+contract_type_epg_2=provider
+
+
+###########################################
+#### configuration variables for uSeg  ####
+###########################################
+
+uepg_name=MyuEPG
+
+uepg_bd=BD_Web_200
+
+allow_useg=useg
+# options: encap/useg
+
+uepg_state=yes
+
+
+#[vcenter]
+#10.128.3.200
+#
+#[vcenter:vars]
+
+##############################
+#### connection variables ####
+##############################
+
+#ansible_connection=local
+#username=root
+#password=vmware
+#validate_certs=no
+#use_proxy=no
+#use_ssl=no
