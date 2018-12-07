@@ -26,10 +26,10 @@
         cluster2: "{{ cluster_infos.obj.uuid.split('-')[2] }}"
         
     - set_fact: # Avi Cluster Name used for APIC registration
-        avi_clustername: "Avi_{{ cluster1 }}_{{ cluster2 }}"
+        avi_device: "Avi_{{ cluster1 }}_{{ cluster2 }}"
 
     - name: display extracted clustername
-      debug: msg="Here is the Cluster Name used for ACI registration {{ avi_clustername }}"
+      debug: msg="Here is the Cluster Name used for ACI registration {{ avi_device }}"
 
 - hosts: apic
   connection: local
