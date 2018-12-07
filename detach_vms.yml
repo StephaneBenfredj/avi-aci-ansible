@@ -1,0 +1,43 @@
+# credits: jcoutur
+---
+- name: Detach VMs from ACI PGs
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars/creds.yml   
+    - vars/tenant_vars.yml
+
+  tasks:
+  - name: Detach front-end VMs from ACI PGs
+    vmware_guest:
+      hostname: "{{ vcenter_ip }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: no
+      name: "{{ item }}"
+      datacenter: "{{ vcenter_dc }}"
+      folder: "{{ vcenter_vm_folder }}"
+      state: present
+      networks:
+      - name: "VM Network"
+    with_items:
+      - "{{ Frontend_1 }}"
+    delegate_to: localhost
+
+  - name: Detach back-end VMs from ACI PGs
+    vmware_guest:
+      hostname: "{{ vcenter_ip }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: no
+      name: "{{ item }}"
+      datacenter: "{{ vcenter_dc }}"
+      folder: "{{ vcenter_vm_folder }}"
+      state: present
+      networks:
+      - name: "VM Network"
+    with_items:
+      - "{{ Backend_1 }}"
+      #- "{{ Backend_2 }}"
+      #- "{{ Backend_3 }}"     
+    delegate_to: localhost
