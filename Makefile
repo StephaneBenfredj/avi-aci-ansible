@@ -16,6 +16,9 @@ vs:
 sg:
 	ansible-playbook apply_avi_sg.yml
 
+nosg:
+	ansible-playbook remove_avi_sg.yml
+
 cleanup:
 	ansible-playbook create_avi_application.yml --extra-vars "avi_config_state=absent"
 	ansible-playbook detach_vms.yml
