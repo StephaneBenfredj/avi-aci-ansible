@@ -16,4 +16,8 @@ avi_vs:
 move_aci_sg:
 	ansible-playbook apply_avi_sg.yml
 
+cleanup: 
+	ansible-playbook create_avi_application.yml --extra-vars "avi_config_state=absent"
+	ansible-playbook detach_vms.yml
+    ansible-playbook delete_aci_tenant.yml
 
