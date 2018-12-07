@@ -17,6 +17,10 @@ apic_ip: 10.1.100.100
 apic_VMM: vc-1
 apic_username: admin
 apic_password: cisco123$%
+apic_validate_certs: no
+apic_use_proxy: no
+apic_use_ssl: yes
+
 #
 vcenter_ip: 10.1.100.200
 vcenter_username: root

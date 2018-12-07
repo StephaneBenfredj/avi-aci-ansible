@@ -1,0 +1,87 @@
+---
+- name: Build ACI tenant
+  hosts: localhost
+  #gather_facts: no
+  vars_files:
+    - vars/creds.yml
+    - vars/tenant_vars.yml
+  roles:
+    - role: avinetworks.avisdk
+
+  tasks:
+  - name: get Avi cluster info from api
+    avi_api_session:
+      avi_credentials: "{{ avi_credentials }}"
+      http_method: get
+      path: cluster
+    register: cluster_infos
+  
+  - name: display Avi cluster uuid
+    debug: msg="{{ cluster_infos.obj.uuid }}"
+   
+  - set_fact: # use jinja2 filter to extract id chunks
+      cluster1: "{{ cluster_infos.obj.uuid.split('-')[1] }}"
+      cluster2: "{{ cluster_infos.obj.uuid.split('-')[2] }}"
+      
+  - set_fact: # Avi Cluster Name used for APIC registration
+      avi_device: "Avi_{{ cluster1 }}_{{ cluster2 }}"
+
+
+  - name: Build ACI tenant and import AVI logical device
+    aci_rest:
+      hostname: "{{ apic_ip }}"
+      username: "{{ apic_username }}"
+      password: "{{ apic_password }}"
+      use_ssl: "{{ apic_use_ssl }}"
+      validate_certs: "{{ apic_validate_certs }}"
+      use_proxy: "{{ apic_use_proxy }}"
+      path: /api/mo/uni.xml
+      method: post
+      content: |
+        <fvTenant name="{{ Tenant }}">
+
+          <fvCtx name="{{ vrf }}"/>
+
+          <fvBD name="{{ bd_1 }}">
+            <fvSubnet ip="{{ bd_1_ip }}"/>
+            <fvRsCtx tnFvCtxName="{{ vrf }}"/>
+          </fvBD>
+
+          <fvBD name="{{ bd_2 }}">
+            <fvSubnet ip="{{ bd_2_ip }}"/>
+            <fvRsCtx tnFvCtxName="{{ vrf }}"/>
+          </fvBD>
+
+
+          <vzFilter name="Http-Filter">
+            <vzEntry name="Http-Port" dFromPort="80" dToPort="80" etherT="ip" prot="6"/>
+          </vzFilter>
+          <vzFilter name="Ping-Filter">
+            <vzEntry name="ICMP" etherT="ip" prot="icmp"/>
+          </vzFilter>
+
+          <vzBrCP name="{{ Contract }}">
+            <vzSubj name="{{ subj_default }}">
+              <vzRsSubjFiltAtt tnVzFilterName="Http-Filter"/>
+              <vzRsSubjFiltAtt tnVzFilterName="Ping-Filter"/>
+            </vzSubj>
+          </vzBrCP>
+
+          <fvAp name="{{ AppProfile }}">
+            <fvAEPg name="{{ ClientEPG }}">
+              <fvRsDomAtt tDn="uni/vmmp-VMware/dom-{{ apic_VMM }}" instrImedcy="immediate" resImedcy="immediate"/>
+              <fvRsBd tnFvBDName="{{ bd_1 }}"/>
+              <fvRsCons tnVzBrCPName="{{ Contract }}"/>
+            </fvAEPg>
+            <fvAEPg name="{{ ServerEPG }}">
+              <fvRsDomAtt tDn="uni/vmmp-VMware/dom-{{ apic_VMM }}" instrImedcy="immediate" resImedcy="immediate"/>
+              <fvRsBd tnFvBDName="{{ bd_2 }}"/>
+              <fvRsProv tnVzBrCPName="{{ Contract }}"/>
+            </fvAEPg>
+          </fvAp>
+
+          <vnsLDevIf ldev="uni/tn-common/lDevVip-{{ avi_device }}"/>
+
+        </fvTenant>
+        
+    delegate_to: localhost
