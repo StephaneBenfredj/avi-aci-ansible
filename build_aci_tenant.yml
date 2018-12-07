@@ -27,7 +27,7 @@
       avi_device: "Avi_{{ cluster1 }}_{{ cluster2 }}"
 
 
-  - name: Build ACI tenant and import AVI logical device
+  - name: Build ACI tenant and import Avi logical device
     aci_rest:
       hostname: "{{ apic_ip }}"
       username: "{{ apic_username }}"

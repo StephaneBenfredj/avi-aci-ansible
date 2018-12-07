@@ -1,0 +1,41 @@
+---
+- name: Attach VMs to PGs created by ACI
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars/creds.yml   
+    - vars/tenant_vars.yml
+
+  tasks:
+  - name: Change VM PG for front-end VMs
+    vmware_guest:
+      hostname: "{{ vcenter_ip }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: no
+      name: "{{ item }}"
+      datacenter: "{{ vcenter_dc }}"
+      folder: "{{ vcenter_vm_folder }}"
+      state: present
+      networks:
+      - name: "{{ Tenant }}|{{ AppProfile }}|{{ ClientEPG }}"
+    with_items:
+      - "{{ Frontend_1 }}"
+    delegate_to: localhost
+
+  - name: Change VM PG for back-end VMs
+    vmware_guest:
+      hostname: "{{ vcenter_ip }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: no
+      name: "{{ item }}"
+      datacenter: "{{ vcenter_dc }}"
+      folder: "{{ vcenter_vm_folder }}"
+      state: present
+      networks:
+      - name: "{{ Tenant }}|{{ AppProfile }}|{{ ServerEPG }}"
+    with_items:
+      - "{{ Backend_1 }}"
+      #- "{{ Backend_2 }}"
+    delegate_to: localhost

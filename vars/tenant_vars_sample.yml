@@ -6,6 +6,11 @@ Tenant: stephane-demo4
 AppProfile: Prod
 ClientEPG: Client-EPG-200
 ServerEPG: Server-EPG-201
+Frontend_1: Web1
+Backend_1: App1
+Backend_2: App2
+Backend_3: App3
+
 
 # Networking
 vrf: Default-VRF

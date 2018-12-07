@@ -27,6 +27,7 @@ vcenter_username: root
 vcenter_password: vmware$%
 vcenter_dc: APIC
 vcenter_folder: myfolder
+vcenter_vm_folder: myfolder
 # 
 AviCloudName: ACI
 #
