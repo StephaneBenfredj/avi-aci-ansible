@@ -47,7 +47,7 @@
         use_ssl: "{{ apic_use_ssl }}"
         validate_certs: "{{ apic_validate_certs }}"
         method: get
-        path: /api/node/mo/uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_clustername'] }}.json
+        path: /api/node/mo/uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_device'] }}.json
 
     - name: export from common to target tenant
       aci_rest:
@@ -58,7 +58,7 @@
         use_ssl: "{{ apic_use_ssl }}"
         validate_certs: "{{ apic_validate_certs }}"
         method: post
-        path: /api/node/mo/uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_clustername'] }}.json
-        content: {"vnsLDevIf":{"attributes":{"dn":"uni/tn-{{ Tenant }}/lDevIf-[uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_clustername'] }}]","ldev":"uni/tn-common/{{ hostvars['localhost']['avi_clustername'] }}","status":"created,modified","rn":"lDevIf-[uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_clustername'] }}]"},"children":[]}}
+        path: /api/node/mo/uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_device'] }}.json
+        content: {"vnsLDevIf":{"attributes":{"dn":"uni/tn-{{ Tenant }}/lDevIf-[uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_device'] }}]","ldev":"uni/tn-common/{{ hostvars['localhost']['avi_device'] }}","status":"created,modified","rn":"lDevIf-[uni/tn-common/lDevVip-{{ hostvars['localhost']['avi_device'] }}]"},"children":[]}}
 
 # export not tested
