@@ -1,0 +1,34 @@
+# credits: jucoutur 
+---
+- name: Apply Avi Virtual Service to the ACI tenant
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars/creds.yml
+    - vars/tenant_vars.yml
+
+  tasks:
+  - name: Apply AVI Service Graph
+  # remove the http filter from the default subject and move it to the AVI redirection subject
+  # then attach the service graph to the Avi redirection subject
+    aci_rest:
+      hostname: "{{ apic_ip }}"
+      username: "{{ apic_username }}"
+      password: "{{ apic_password }}"
+      use_ssl: "{{ apic_use_ssl }}"
+      validate_certs: "{{ apic_validate_certs }}"
+      path: /api/mo/uni.xml
+      method: post
+      content: |
+        <fvTenant name="{{ Tenant }}">
+          <vzBrCP name="{{ Contract }}">
+            <vzSubj name="{{ subj_default }}">
+              <vzRsSubjFiltAtt status="deleted" tnVzFilterName="Http-Filter"/>
+            </vzSubj>
+            <vzSubj name="{{ subj_to_avi }}">
+              <vzRsSubjGraphAtt tnVnsAbsGraphName="{{ ServiceGraph }}"/>
+              <vzRsSubjFiltAtt tnVzFilterName="Http-Filter"/>
+            </vzSubj>
+          </vzBrCP>
+        </fvTenant>
+    delegate_to: localhost

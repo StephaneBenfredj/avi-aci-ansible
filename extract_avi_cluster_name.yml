@@ -4,6 +4,7 @@
 
 - hosts: localhost
   connection: local
+  gather_facts: no
   vars_files:
     - vars/creds.yml
     
@@ -18,16 +19,17 @@
         path: cluster
       register: cluster_infos
     
-    - name: display Avi cluster uuid
+    - name: get Avi cluster uuid
       debug: msg="{{ cluster_infos.obj.uuid }}"
      
-    - set_fact: # use jinja2 filter to extract id chunks
+    - name: use jinja2 filter to extract id chunks
+      set_fact:
         cluster1: "{{ cluster_infos.obj.uuid.split('-')[1] }}"
         cluster2: "{{ cluster_infos.obj.uuid.split('-')[2] }}"
         
-    - set_fact: # Avi Cluster Name used for APIC registration
-        avi_clustername: "Avi_{{ cluster1 }}_{{ cluster2 }}"
+    - name: create clustername from cluster ids
+      set_fact:
+        avi_device: "Avi_{{ cluster1 }}_{{ cluster2 }}"
 
     - name: display extracted clustername
-      debug: msg="Here is the Cluster Name used for ACI registration {{ avi_clustername }}"
-
+      debug: msg="Here is the Cluster Name used for ACI registration {{ avi_device }}"

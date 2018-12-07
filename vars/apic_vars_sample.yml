@@ -1,0 +1,7 @@
+#credentials for APIC 
+apic_host: 10.128.2.133
+apic_username: admin
+apic_password: avinetworks
+apic_validate_certs: no
+apic_use_proxy: no
+apic_use_ssl: yes
