@@ -1,0 +1,35 @@
+# use api_session module to get cluster uuid and extract Avi Cluster Name used for APIC registration
+#
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+    - vars/creds.yml
+    
+  roles:
+    - role: avinetworks.avisdk
+
+  tasks:
+    - name: get Avi cluster info from api
+      avi_api_session:
+        avi_credentials: "{{ avi_credentials }}"
+        http_method: get
+        path: cluster
+      register: cluster_infos
+    
+    - name: get Avi cluster uuid
+      debug: msg="{{ cluster_infos.obj.uuid }}"
+     
+    - name: use jinja2 filter to extract id chunks
+      set_fact:
+        cluster1: "{{ cluster_infos.obj.uuid.split('-')[1] }}"
+        cluster2: "{{ cluster_infos.obj.uuid.split('-')[2] }}"
+        
+    - name: create clustername from cluster ids
+      set_fact:
+        avi_device: "Avi_{{ cluster1 }}_{{ cluster2 }}"
+
+    - name: display extracted clustername
+      debug: msg="Here is the Cluster Name used for ACI registration {{ avi_device }}"
