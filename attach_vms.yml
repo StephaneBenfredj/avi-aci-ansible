@@ -1,4 +1,4 @@
-# credits: jcoutur 
+# credits: jucoutur 
 ---
 - name: Attach VMs to PGs created by ACI
   hosts: localhost

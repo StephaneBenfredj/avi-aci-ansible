@@ -1,4 +1,4 @@
-# credits: jcoutur
+# credits: jucoutur
 ---
 - name: Detach VMs from ACI PGs
   hosts: localhost
