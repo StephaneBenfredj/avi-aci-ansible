@@ -1,0 +1,29 @@
+# credits: jcoutur
+---
+- name: ACI-AVI integration
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars/creds.yml
+    - vars/tenant_vars.yml
+
+  tasks:
+  - name: Remove AVI Service Graph
+    aci_rest:
+      hostname: "{{ apic_ip }}"
+      username: "{{ apic_username }}"
+      password: "{{ apic_password }}"
+      use_ssl: "{{ apic_use_ssl }}"
+      validate_certs: "{{ apic_validate_certs }}"
+      use_proxy: "{{ apic_use_proxy }}"
+      path: /api/mo/uni.xml
+      method: post
+      content: |
+        <fvTenant name="{{ Tenant }}">
+          <vzBrCP name="{{ Contract }}">
+            <vzSubj name="{{ subj_to_avi }}">
+              <vzRsSubjGraphAtt status="deleted" tnVnsAbsGraphName="{{ ServiceGraph }}"/>
+            </vzSubj>
+          </vzBrCP>
+        </fvTenant>
+    delegate_to: localhost
