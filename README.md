@@ -13,7 +13,7 @@ set of playbooks to configure cloud in Avi Vantage with Cisco ACI integration
 
 * Rename creds_sample.yml to creds.yml
 * Rename tenant_vars_sample.yml to tenant_vars.yml
-* Rename apic_vars_sample.yml to apic_vars.yml
+
 
 * update content with appropriate credentials and data
 
