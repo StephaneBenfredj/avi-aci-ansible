@@ -20,7 +20,7 @@ avi_config:
       tenant: '{{ Tenant }}'
       tenant_ref: '/api/tenant/?name={{ Tenant }}' 
       analytics_policy:
-        client_insights: ACTIVE
+        #client_insights: ACTIVE
         full_client_logs:
           all_headers: true
           duration: 0
