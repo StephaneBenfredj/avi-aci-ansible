@@ -1,12 +1,14 @@
 # tenant variables
 # update accordingly
 
+# Segmentation
 Tenant: stephane-demo4
 AppProfile: Prod
-
 ClientEPG: Client-EPG-200
 ServerEPG: Server-EPG-201
 
+# Networking
+vrf: Default-VRF
 bd_1: Prod-200
 bd_1_subnet: 10.200.0.0
 bd_1_subnet_mask: 24
@@ -18,14 +20,19 @@ bd_2: Prod-201
 bd_2_subnet: 10.201.0.0
 bd_2_subnet_mask: 24
 bd_2_ip: 10.201.0.254/24
-bd_2_start_addr: 10.201.0.240
-bd_2_end_addr: 10.201.0.249 
+bd_2_subnet_start_addr: 10.201.0.240
+bd_2_subnet_end_addr: 10.201.0.249 
 
-#
+# Service Graph 
 Contract: Prod_Web_Contract
 ServiceGraph: stephaneL2-sg
+subj_default: Default-Subject
+subj_to_avi: To-AVI-LB
 
-#
+# Avi 
 appaci_vip: 10.200.0.32
-app_name: appaci
+app_name: My_app_aci
+
+# note: 
+# avi_device is retrieved from Avi API in playbook
 
