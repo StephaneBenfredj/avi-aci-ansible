@@ -18,3 +18,5 @@ set of playbooks to configure cloud in Avi Vantage with Cisco ACI integration
 * update content with appropriate credentials and data
 
 * use Makefile to launch associated playbooks
+
+** Credits to [@jucoutur](https://github.com/jucoutur) for the contribution on ACI and VMW tasks **
