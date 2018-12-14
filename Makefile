@@ -1,3 +1,8 @@
+check: 
+	ansible --version
+	pip list | grep avisdk
+	ansible-galaxy list | grep avi
+
 cloud:
 	ansible-playbook create_avi_cloud.yml
 
